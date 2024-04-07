@@ -7,8 +7,6 @@ public class Cadastrar extends JFrame {
 
     public void TelaCadastro(){
 
-        boolean visivel = false;
-
         // Nome da janela e dimensões
         JFrame tela = new JFrame("Cadastro");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,15 +93,20 @@ public class Cadastrar extends JFrame {
         grid.gridwidth = 2;
         grid.anchor = GridBagConstraints.CENTER;
         painel.add(btnVoltar, grid);
+        btnVoltar.addActionListener(e -> opcoesGestao());
 
 
         // Conecta o painel ao frame
         tela.add(painel);
 
         // Torna o painel visivel
-        tela.setVisible(visivel);
+        tela.setVisible(true);
     }
+    public void opcoesGestao(){
+        Gestao gestao = new Gestao();
+        gestao.opcoesGestao();
 
+    }
 
 }
 
