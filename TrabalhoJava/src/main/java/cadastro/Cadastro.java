@@ -97,15 +97,12 @@ public class Cadastro extends JFrame {
         painel.add(btnCadastrar, grid);
         btnCadastrar.addActionListener(e -> cadastrar());
 
-
-
         // Conecta o painel ao frame
         tela.add(painel);
 
         // Torna o painel visivel
         tela.setVisible(true);
     }
-
 
     public String getNome() {
         return nome;
@@ -160,7 +157,7 @@ public class Cadastro extends JFrame {
         if (email.isEmpty()) throw new Exception("%s não pode ser vazio".formatted(campo));
         if (telefone.isEmpty()) throw new ExecutionControl.InternalException("%s não pode ser vazio".formatted(campo));
     }
-    public void cadastrar() throws Validacao{
+    public void cadastrar() {
         var x = new Cadastro();
         // Obtem os dados dos campos de texto
         x.setNome(inputNome.getText());
