@@ -95,7 +95,14 @@ public class Cadastro extends JFrame {
         grid.gridwidth = 2;
         grid.anchor = GridBagConstraints.CENTER;
         painel.add(btnCadastrar, grid);
-        btnCadastrar.addActionListener(e -> cadastrar());
+        btnCadastrar.addActionListener(e -> {
+            try {
+                cadastrar();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        });
 
         // Conecta o painel ao frame
         tela.add(painel);
@@ -152,23 +159,32 @@ public class Cadastro extends JFrame {
         this.inputTelefone = inputTelefone;
     }
 
-    public void dispararExcecoes(String campo) throws Exception {
-
-        if (email.isEmpty()) throw new Exception("%s não pode ser vazio".formatted(campo));
-        if (telefone.isEmpty()) throw new ExecutionControl.InternalException("%s não pode ser vazio".formatted(campo));
-    }
     public void cadastrar() {
-        var x = new Cadastro();
-        // Obtem os dados dos campos de texto
-        x.setNome(inputNome.getText());
-        x.setEmail(inputEmail.getText());
-        x.setTelefone(inputTelefone.getText());
+        try {
+            // Obtem os dados dos campos de texto
+            String nome = inputNome.getText();
+            String email = inputEmail.getText();
+            String telefone = inputTelefone.getText();
 
+            // Validação utilizando a classe Validacao
+            Validacao.validarCadastro(nome, email, telefone);
 
+            // Se todos os campos estiverem preenchidos, mostra a mensagem de cadastro
+            String mensagem = "Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone;
+            JOptionPane.showMessageDialog(null, mensagem, "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            // Exibe a mensagem de erro específica lançada pela classe Validacao
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Se todos os campos estiverem preenchidos, mostra a mensagem de cadastro
         // Mensagem de confirmação
-        String mensagem = "Nome: " + x.getNome() + "\nEmail: " + x.getEmail() + "\nTelefone: " + x.getTelefone();
-        JOptionPane.showMessageDialog(null, mensagem, "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
 
+        if (nome.isEmpty() || nome.length() < 6) {
+            JOptionPane.showMessageDialog(null, "Nome deve ter pelo menos 6 caracteres!", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return; // Sair do método se a validação falhar
+        }
     }
 }
 

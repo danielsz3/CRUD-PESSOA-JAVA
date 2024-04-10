@@ -5,6 +5,4 @@ public class Gestao {
         Cadastro telaCadastro = new Cadastro();
         telaCadastro.TelaCadastro();
     }
-
-
 }
