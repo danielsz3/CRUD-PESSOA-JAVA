@@ -40,7 +40,7 @@ public class Cadastro extends JFrame {
 
         // Form Nome
         JLabel formNome = new JLabel();
-        formNome.setText("Insira seu nome:   ");
+        formNome.setText("Insira seu nome completo:   ");
         grid.gridx = 0;
         grid.gridy = 0;
         painel.add(formNome, grid);
@@ -159,32 +159,19 @@ public class Cadastro extends JFrame {
         this.inputTelefone = inputTelefone;
     }
 
-    public void cadastrar() {
-        try {
-            // Obtem os dados dos campos de texto
-            String nome = inputNome.getText();
-            String email = inputEmail.getText();
-            String telefone = inputTelefone.getText();
+    public void cadastrar() throws Exception {
 
-            // Validação utilizando a classe Validacao
-            Validacao.validarCadastro(nome, email, telefone);
+        // Obtem os dados dos campos de texto
+        setNome(inputNome.getText());
+        setEmail(inputEmail.getText());
+        setTelefone(inputTelefone.getText());
 
-            // Se todos os campos estiverem preenchidos, mostra a mensagem de cadastro
-            String mensagem = "Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone;
-            JOptionPane.showMessageDialog(null, mensagem, "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (Exception e) {
-            // Exibe a mensagem de erro específica lançada pela classe Validacao
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
-        }
+        // Validação utilizando a classe Validacao
+        Validacao.validarCadastro(getNome(), getEmail(), getTelefone());
 
         // Se todos os campos estiverem preenchidos, mostra a mensagem de cadastro
-        // Mensagem de confirmação
-
-        if (nome.isEmpty() || nome.length() < 6) {
-            JOptionPane.showMessageDialog(null, "Nome deve ter pelo menos 6 caracteres!", "Erro de validação", JOptionPane.ERROR_MESSAGE);
-            return; // Sair do método se a validação falhar
-        }
+        String mensagem = "Nome: " + this.nome + "\nEmail: " + this.email + "\nTelefone: " + this.telefone;
+        JOptionPane.showMessageDialog(null, mensagem, "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
 }
 
