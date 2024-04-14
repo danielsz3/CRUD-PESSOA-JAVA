@@ -9,19 +9,18 @@ public class Validacao {
         try {
 
             if (!(nome.length() >= 6) || !nome.matches("^[a-zA-Zà-ü\\s]+$")) {
-                throw new Exception("Nome inválido: deve ter pelo menos 6 caracteres e conter apenas letras");
+                throw new RuntimeException("Nome inválido: deve ter pelo menos 6 caracteres e conter apenas letras");
             }
 
             if (!email.contains("@") || !email.endsWith(".com")) {
-                throw new Exception("E-mail inválido");
+                throw new RuntimeException("E-mail inválido");
             }
 
             if (!(telefone.length() == 11)) {
-                throw new Exception("Digite um número de telefone válido");
+                throw new RuntimeException("Digite um número de telefone válido");
             }
 
-        } catch (Exception e) {
-
+        } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
