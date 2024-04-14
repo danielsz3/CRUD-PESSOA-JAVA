@@ -1,19 +1,12 @@
 package cadastro;
 
-import java.util.regex.*;
-import javax.swing.JOptionPane;
-import javax.swing.*;
-import static java.util.regex.Pattern.matches;
-
-
 public class Validacao {
 
-    public static void validarCadastro(String nome, String email, String telefone) throws Exception {
+    public static void validarCadastro(String nome, String email, String telefone) {
 
         // Validação dos campos
 
         try {
-
 
             if (!(nome.length() >= 6) || !nome.matches("^[a-zA-Zà-ü\\s]+$")) {
                 throw new Exception("Nome inválido: deve ter pelo menos 6 caracteres e conter apenas letras");
